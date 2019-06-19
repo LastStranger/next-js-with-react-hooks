@@ -11,10 +11,6 @@
       "static/runtime/webpack.js",
       "static/runtime/main.js"
     ],
-    "/imageChange": [
-      "static/runtime/webpack.js",
-      "static/runtime/main.js"
-    ],
     "/imageScroll": [
       "static/runtime/webpack.js",
       "static/runtime/main.js"

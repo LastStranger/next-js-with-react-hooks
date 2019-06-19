@@ -88,7 +88,7 @@ module.exports =
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 5);
+/******/ 	return __webpack_require__(__webpack_require__.s = 3);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -343,9 +343,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _babel_runtime_corejs2_helpers_esm_slicedToArray__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime-corejs2/helpers/esm/slicedToArray */ "./node_modules/@babel/runtime-corejs2/helpers/esm/slicedToArray.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "react");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! lodash */ "lodash");
+/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(lodash__WEBPACK_IMPORTED_MODULE_2__);
 
 var _jsxFileName = "D:\\demo\\next-js-with-react-hooks\\src\\ImageComponentScroll.js";
 
+
+var num = 0;
 
 var ImageComponent = function ImageComponent(_ref) {
   var primaryImg = _ref.primaryImg,
@@ -363,7 +367,16 @@ var ImageComponent = function ImageComponent(_ref) {
 
   var imgRef = Object(react__WEBPACK_IMPORTED_MODULE_1__["useRef"])(null);
   Object(react__WEBPACK_IMPORTED_MODULE_1__["useEffect"])(function () {
-    window.addEventListener('scroll', scrollHandle);
+    // window.addEventListener('scroll', scrollHandle);
+    // window.addEventListener('scroll', debounce(scrollHandle, 1000));
+
+    /*限流,一百毫秒内只会执行一次,滚动的时候也会检查位置,只是检查位置没有那么频繁*/
+    window.addEventListener('scroll', lodash__WEBPACK_IMPORTED_MODULE_2___default.a.throttle(scrollHandle, 100));
+    /*debounce用在这是为了滚动的时候不去检查位置,滚动完成的时候检查位置*/
+    // window.addEventListener('scroll', _.debounce(scrollHandle, 30));
+    // const res = isInView();
+    // setInView(res);
+
     setInView(isInView());
     setIsLoading(false);
     return function () {
@@ -380,16 +393,25 @@ var ImageComponent = function ImageComponent(_ref) {
     return false;
   };
 
+  var debounce = function debounce(fn) {
+    var time = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 1000;
+    var timer = null;
+    return function () {
+      clearTimeout(timer);
+      timer = setTimeout(fn, time);
+    };
+  };
+
   var scrollHandle = function scrollHandle() {
-    console.log(isInView());
-    var res = isInView();
-    setInView(res);
+    // num++;
+    // console.log(num);
+    setInView(isInView());
   };
 
   return isLoading ? null : react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 32
+      lineNumber: 48
     },
     __self: this
   }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("img", {
@@ -397,11 +419,11 @@ var ImageComponent = function ImageComponent(_ref) {
     src: inView ? primaryImg : secImg,
     alt: "",
     style: {
-      maxWidth: '500px'
+      height: '300px'
     },
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 33
+      lineNumber: 49
     },
     __self: this
   }));
@@ -411,7 +433,7 @@ var ImageComponent = function ImageComponent(_ref) {
 
 /***/ }),
 
-/***/ 5:
+/***/ 3:
 /*!************************************!*\
   !*** multi ./pages/imageScroll.js ***!
   \************************************/
@@ -442,6 +464,17 @@ module.exports = require("core-js/library/fn/array/is-array");
 /***/ (function(module, exports) {
 
 module.exports = require("core-js/library/fn/get-iterator");
+
+/***/ }),
+
+/***/ "lodash":
+/*!*************************!*\
+  !*** external "lodash" ***!
+  \*************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = require("lodash");
 
 /***/ }),
 
