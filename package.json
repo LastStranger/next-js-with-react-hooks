@@ -21,7 +21,7 @@
   },
   "homepage": "https://github.com/LastStranger/next-js-with-react-hooks#readme",
   "dependencies": {
-    "lodash": "^4.17.11",
+    "lodash": "^4.17.13",
     "next": "^8.1.0",
     "react": "^16.8.6",
     "react-dom": "^16.8.6"
